@@ -1,0 +1,111 @@
+<div class="book-detail-outer">
+    <div class="img-cnt">
+        <div class="small-img1">
+            <img src="{{bookList.bookImage}}" alt="">
+        </div>
+        <div style="background-color: rgba(61, 61, 61, 0.228); border: 1px solid black; " class="small-img1">
+            <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A21c3a4cf-07ad-4148-94c9-eb1367f8b789&params=version%3A0&token=1715407801_da39a3ee_e282bb33b997599fd9ae0c61edd5d6b31de51750&api_key=CometServer1"
+                alt="">
+        </div>
+        <div class="inner-book">
+            <img src="{{bookList.bookImage}}" alt="">
+        </div>
+        <div class="option">
+            <button *ngIf="!bookCount" style="background-color: maroon;" (click)="handleAddBook(bookList)"
+                mat-raised-button color="primary">ADD TO BAG</button>
+            <div *ngIf="bookCount" class="count">
+                <span class="increament" (click)="handlecount('minus')">-</span> 
+                <span class="countvalue">{{count}}</span> <span class="increament" (click)="handlecount('add')">+</span>
+            </div>
+            <button style="background-color: rgba(0, 0, 0, 0.84);" mat-raised-button color="primary"> 
+                <mat-icon svgIcon="heart-icon" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>WISH LIST</button>
+        </div>
+    </div>
+    <div class="desc-cnt">
+        <div class="book-desc">
+            <div class="content">
+                <span class="booktitle">{{bookList.bookName}}</span>
+                <span style="color: #616161;">{{bookList.authorName}}</span>
+                <div class="rating-cnt">
+                    <span class="rating">4.5 * <span class="outof">&nbsp; (20)</span></span>
+                    <span class="sellingprice">Rs.{{bookList.price}}<span class="originalprice">Rs.2000</span></span>
+                </div>
+            </div>
+            <br>
+            <div class="line"></div>
+            <div class="book-detail">
+                <br><br>
+                <div>Book Details</div>
+                <br>
+                <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique, dignissimos, commodi velit
+                    ipsam repudiandae aperiam quaerat, tempore amet inventore quibusdam distinctio? Consequuntur nisi
+                    officiis id ratione dolorum animi quod minima?</div>
+                <br><br>
+                <div class="line"></div>
+                <br>
+                <div>Customer Feedback</div>
+                <br>
+                <div class="feedback-cnt">
+                    <div>
+                        Overall Rating
+                        <br>
+                        <div class="star_icon">
+                            <mat-icon svgIcon="star_icon_black" aria-hidden="false"
+                                aria-label="heart SVG icon"></mat-icon>
+                            <mat-icon svgIcon="star_icon_black" aria-hidden="false"
+                                aria-label="heart SVG icon"></mat-icon>
+                            <mat-icon svgIcon="star_icon_black" aria-hidden="false"
+                                aria-label="heart SVG icon"></mat-icon>
+                            <mat-icon svgIcon="star_icon_black" aria-hidden="false"
+                                aria-label="heart SVG icon"></mat-icon>
+                            <mat-icon svgIcon="star_icon_black" aria-hidden="false"
+                                aria-label="heart SVG icon"></mat-icon>
+                        </div>
+                        <div class="input">
+                            <input type="text" placeholder="Write your review">
+                            <div class="submit-btn">
+                                <br>
+                                <button mat-raised-button color="primary">SUBMIT</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="name-cnt">
+                    <div class="name"> AC </div>
+                    <div>&nbsp; &nbsp; &nbsp; Aniket Chile</div>
+                </div>
+                <div class="star_icon">
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_black" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_black" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                </div>
+                <div>
+                    <br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam nesciunt rem asperiores similique
+                    magni deserunt quos, fugit itaque? Mollitia, nostrum? Distinctio perferendis neque fuga eligendi est
+                </div>
+                <div class="name-cnt">
+                    <div class="name"> AC </div>
+                    <div> &nbsp; &nbsp; &nbsp; Aniket Chile</div>
+                </div>
+                <div class="star_icon">
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_yellow" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_black" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                    <mat-icon svgIcon="star_icon_black" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>
+                </div>
+                <div>
+                    <br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam nesciunt rem asperiores similique
+                    magni deserunt quos, fugit itaque? Mollitia, nostrum? Distinctio perferendis neque fuga eligendi est
+                    <br><br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
