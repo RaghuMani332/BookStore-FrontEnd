@@ -1,0 +1,34 @@
+<div class="cart-outer-cnt" *ngFor="let book of cartList">
+    <br>
+    <div class="count-cnt">
+        <span>My cart(1)</span>
+        <div class="loc-icon-cnt"><span class="loc-icon"> <mat-icon svgIcon="location-icon"></mat-icon>
+                BridgeLabzSolution LLP,No... <mat-icon svgIcon="drop-down-icon"></mat-icon></span></div>
+    </div>
+    <br>
+    <div class="img-cnt">
+       
+        <div class="content">
+            <img src="{{book.bookImage}}"
+            alt="">
+            <div>
+                <span class="booktitle">{{book.bookName}}</span>
+            <span style="color: #616161;">{{book.authorName}}</span>
+            <div class="rating-cnt">
+                <span class="sellingprice">Rs.{{book.price}}<span class="originalprice">Rs.2000</span></span>
+                <div class="count">
+                    <span class="increament">-</span> <span class="countvalue">1</span> <span
+                        class="increament">+</span>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+        <button class="button" mat-raised-button color="primary">PLACE ORDER</button>
+
+
+    </div>
+   
+</div>
+<div class="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Address Details</div>
+<div class="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Order Summer</div>

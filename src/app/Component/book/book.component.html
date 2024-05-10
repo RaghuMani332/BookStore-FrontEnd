@@ -1,0 +1,22 @@
+<div class="outer">
+    <div class="book-outer-cnt" *ngFor="let book of bookList">
+        <div (click)="handleClick(book)">
+            <div class="book-img">
+                <img src="{{book.bookImage}}" alt="" class="img-cnt">
+            </div>
+            <div class="content">
+                <span class="booktitle">{{book.bookName}}</span>
+                <span style="color: #616161;">{{book.authorName}}</span>
+               <div>
+                <span class="rating">4.5 *  
+                    <span class="outof">&nbsp; (20)</span>
+                </span>
+               </div>
+                <span class="sellingprice">Rs.{{book.price}} <span class="originalprice">Rs.2000</span></span>
+            </div>
+        </div>
+        </div>
+       
+    
+</div>
+

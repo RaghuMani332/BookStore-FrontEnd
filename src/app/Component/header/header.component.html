@@ -1,0 +1,52 @@
+<div class="header-main-cnt">
+    <div class="header">
+     <div class="bookstore-icon">
+        <mat-icon class="book-icon" svgIcon="book-icon" aria-hidden="false" aria-label="Note SVG icon"></mat-icon>
+       <span>BookStore</span>
+    </div>
+
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search...">
+        <mat-icon class="search-icon" svgIcon="search-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+    </div>
+
+    <div class="profile">
+        <mat-icon class="profile-icon"  svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+        <span>Profile</span>
+    </div>
+
+    <div class="cart" routerLink="cart">
+        <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+        <span>Cart</span>
+    </div>
+</div>
+</div>
+<!-- ----------------------------------------------------- -->
+<div *ngIf="false; else nav"  class="book-main-cnt">
+    <div class="items">
+        <span class="book">Books</span>
+        <span>(128items)</span>
+    </div>
+    <div class="sort">
+     &nbsp;  Sort By Relevance &nbsp;
+            <mat-icon mat-button [matMenuTriggerFor]="beforeMenu" svgIcon="dropdown-icon" aria-hidden="false" aria-label="dropdown SVG icon"></mat-icon>
+            &nbsp;
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+              <button mat-menu-item>Price: Low to High </button>
+              <button mat-menu-item>Price: High to Low </button>
+              <button mat-menu-item>Newest Arrivals </button>
+            </mat-menu>
+    </div>
+</div>
+<ng-template #nav>
+    <div  class="book-main-cnt">
+        <div class="items">
+            <span class="home">Home /</span>
+            <span><b>{{page}}</b></span>
+        </div>
+        <div class="sort">
+            
+        </div>
+    </div>
+    
+</ng-template>
