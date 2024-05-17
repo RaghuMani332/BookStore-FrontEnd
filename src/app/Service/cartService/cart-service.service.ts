@@ -12,8 +12,16 @@ export class CartServiceService {
   {
     return this.httpService.getAllCart();
   }
-  addToCartApiCall(data:any)
+  addToCartApiCall(data:{quantity:number,bookId:number})
   {
     return this.httpService.addToCart(data)
+  }
+  updateQuantityToCartApiCall(cartId:number,quantity:number)
+  {
+    return this.httpService.updateQuantiyToCart(cartId,quantity);
+  }
+  unCartItem(cartId:number)
+  {
+    return this.httpService.unCartItem(cartId);
   }
 }

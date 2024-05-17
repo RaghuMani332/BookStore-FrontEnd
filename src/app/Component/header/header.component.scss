@@ -56,6 +56,14 @@
     font-size: 0.6em; 
     gap: 0.5%; 
     margin-top: 0.5%; 
+    
+}
+.btn {
+    display: flex;
+    // border: 1px solid;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart {
@@ -100,4 +108,16 @@
  display: flex;
  align-items: center;  
  border: 1px solid #909090;
+}
+
+
+//----------
+.profile-main-cnt
+{
+    // padding: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
 }

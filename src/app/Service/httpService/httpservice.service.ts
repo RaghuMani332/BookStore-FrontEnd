@@ -13,7 +13,7 @@ export class HttpserviceService {
 
   login(userName:string,password:string)
   {
-    return this.httpService.get<any>(`https://localhost:7098/api/User/raghum11154%40gmail.com/Raghu%401234
+    return this.httpService.get<any>(`https://localhost:7098/api/User/${encodeURIComponent(userName)}/${encodeURIComponent(password)}
     `)
   }
 
@@ -25,8 +25,20 @@ export class HttpserviceService {
   {
     return this.httpService.get<any>("https://localhost:7098/api/Cart",{headers:this.authHeader})
   }
-  addToCart(data:any):Observable<any>
+  addToCart(data:{quantity:number,bookId:number}):Observable<any>
   {
-    return this.httpService.post<any>('https://localhost:7098/api/Cart',{data},{headers:this.authHeader})
+    return this.httpService.post<any>('https://localhost:7098/api/Cart',{...data},{headers:this.authHeader})
+  }
+  updateQuantiyToCart(cartId:number,quantity:number):Observable<any>
+  {
+    return this.httpService.put<any>(`https://localhost:7098/api/Cart/${cartId}/${quantity}`,{},{headers:this.authHeader})
+  }
+  unCartItem(cartId:number):Observable<any>
+  {
+    return this.httpService.patch(`https://localhost:7098/api/Cart?cartId=${cartId}`,{},{headers:this.authHeader})
+  }
+  getNamebyToken():Observable<any>
+  {
+    return this.httpService.get<any>(`https://localhost:7098/api/Book/getNameByToken`,{headers:this.authHeader})
   }
 }
