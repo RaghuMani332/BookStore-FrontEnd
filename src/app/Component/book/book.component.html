@@ -1,8 +1,9 @@
 <div class="outer">
     <div class="book-outer-cnt" *ngFor="let book of bookList">
-        <div (click)="handleClick(book)">
-            <div class="book-img">
+        <div >
+            <div class="book-img" (click)="handleClick(book)">
                 <img src="{{book.bookImage}}" alt="" class="img-cnt">
+                <!-- <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A138faf88-74b8-4931-8d8a-2413a3fcc2b9&params=version%3A0&token=1715680101_da39a3ee_7355e0617a3e07f3f361384055f9da818b436092&api_key=CometServer1" alt="" class="img-cnt"> -->
             </div>
             <div class="content">
                 <span class="booktitle">{{book.bookName}}</span>

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookComponent } from './Component/book/book.component';
@@ -16,6 +18,12 @@ import { HeaderComponent } from './Component/header/header.component';
 import { LoginComponent } from './Component/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CustomerDetailsComponent } from './Component/customer-details/customer-details.component';
+
+
+
+
 
 
 @NgModule({
@@ -27,9 +35,11 @@ import { AppComponent } from './app.component';
     BookcontainerComponent,
     BookdetailsComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
+    CustomerDetailsComponent
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -37,7 +47,11 @@ import { AppComponent } from './app.component';
     MatMenuModule,
     HttpClientModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDialogModule
     
   ],
   providers: [],

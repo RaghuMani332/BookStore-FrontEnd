@@ -17,14 +17,16 @@
             <div class="rating-cnt">
                 <span class="sellingprice">Rs.{{book.price}}<span class="originalprice">Rs.2000</span></span>
                 <div class="count">
-                    <span class="increament">-</span> <span class="countvalue">1</span> <span
-                        class="increament">+</span>
+                    <span class="increament" (click)="handlecount('minus',book)">-</span> <span class="countvalue">{{book.quantity}}</span> <span
+                        class="increament" (click)="handlecount('add',book)">+</span>
                 </div>
             </div>
             </div>
             
         </div>
-        <button class="button" mat-raised-button color="primary">PLACE ORDER</button>
+        <button class="button" mat-raised-button color="primary" (click)="clearCart(book)" >Clear</button>
+
+        <button class="button" mat-raised-button color="primary" (click)="handlePlaceOrder(book,'')">PLACE ORDER</button>
 
 
     </div>

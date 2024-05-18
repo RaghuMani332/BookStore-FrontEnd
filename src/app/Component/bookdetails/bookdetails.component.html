@@ -1,21 +1,21 @@
 <div class="book-detail-outer">
     <div class="img-cnt">
         <div class="small-img1">
-            <img src="{{bookList.bookImage}}" alt="">
+            <img src="{{Selectedbook.bookImage}}" alt="">
         </div>
         <div style="background-color: rgba(61, 61, 61, 0.228); border: 1px solid black; " class="small-img1">
             <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A21c3a4cf-07ad-4148-94c9-eb1367f8b789&params=version%3A0&token=1715407801_da39a3ee_e282bb33b997599fd9ae0c61edd5d6b31de51750&api_key=CometServer1"
                 alt="">
         </div>
         <div class="inner-book">
-            <img src="{{bookList.bookImage}}" alt="">
+            <img src="{{Selectedbook.bookImage}}" alt="">
         </div>
         <div class="option">
-            <button *ngIf="!bookCount" style="background-color: maroon;" (click)="handleAddBook(bookList)"
+            <button *ngIf="!bookCount" style="background-color: maroon;" (click)="handleAddBook(Selectedbook)"
                 mat-raised-button color="primary">ADD TO BAG</button>
             <div *ngIf="bookCount" class="count">
-                <span class="increament" (click)="handlecount('minus')">-</span> 
-                <span class="countvalue">{{count}}</span> <span class="increament" (click)="handlecount('add')">+</span>
+                <span class="increament" (click)="handlecount('minus',Selectedbook)">-</span> 
+                <span class="countvalue">{{count}}</span> <span class="increament" (click)="handlecount('add',Selectedbook)">+</span>
             </div>
             <button style="background-color: rgba(0, 0, 0, 0.84);" mat-raised-button color="primary"> 
                 <mat-icon svgIcon="heart-icon" aria-hidden="false" aria-label="heart SVG icon"></mat-icon>WISH LIST</button>
@@ -24,11 +24,11 @@
     <div class="desc-cnt">
         <div class="book-desc">
             <div class="content">
-                <span class="booktitle">{{bookList.bookName}}</span>
-                <span style="color: #616161;">{{bookList.authorName}}</span>
+                <span class="booktitle">{{Selectedbook.bookName}}</span>
+                <span style="color: #616161;">{{Selectedbook.authorName}}</span>
                 <div class="rating-cnt">
                     <span class="rating">4.5 * <span class="outof">&nbsp; (20)</span></span>
-                    <span class="sellingprice">Rs.{{bookList.price}}<span class="originalprice">Rs.2000</span></span>
+                    <span class="sellingprice">Rs.{{Selectedbook.price}}<span class="originalprice">Rs.2000</span></span>
                 </div>
             </div>
             <br>
@@ -109,3 +109,9 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+

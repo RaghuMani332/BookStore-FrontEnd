@@ -11,14 +11,32 @@
     </div>
 
     <div class="profile">
-        <mat-icon class="profile-icon"  svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-        <span>Profile</span>
+      
+        
+            <button  mat-button [matMenuTriggerFor]="menu" #menuTrigger>  <div class="btn"><mat-icon class="profile-icon"  svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon></div>{{userName}} </button>
+            <mat-menu #menu="matMenu">
+                <div class="profile-main-cnt">
+                    Welcome
+                    <div>To access account and manage order</div>
+                    <div><button mat-stroked-button color="warn"> <button mat-button (click)="openDialog()">&nbsp; LOGIN/SIGNUP &nbsp;</button>
+                    </button></div>
+                    <hr>
+                    <div>My Orders</div>
+                    <div>Wishlist</div>
+                </div>
+              <!-- <button mat-menu-item (click)="openDialog()"></button> -->
+            </mat-menu>
+        
     </div>
 
     <div class="cart" routerLink="cart">
-        <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-        <span>Cart</span>
+       
+        <div class="cart" routerLink="cart">
+            <button  mat-button  #menuTrigger>  <div class="btn"> <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon></div>Cart </button>
+            
+        </div>
     </div>
+    <button (click)="logout()">logout</button>
 </div>
 </div>
 <!-- ----------------------------------------------------- -->
@@ -28,6 +46,7 @@
         <span>(128items)</span>
     </div>
     <div class="sort">
+        
      &nbsp;  Sort By Relevance &nbsp;
             <mat-icon mat-button [matMenuTriggerFor]="beforeMenu" svgIcon="dropdown-icon" aria-hidden="false" aria-label="dropdown SVG icon"></mat-icon>
             &nbsp;
@@ -50,3 +69,7 @@
     </div>
     
 </ng-template>
+
+
+
+

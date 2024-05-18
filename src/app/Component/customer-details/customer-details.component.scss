@@ -143,3 +143,97 @@ display: flex;
     display: flex;
     align-items: center;
 }
+.customer-details-outer-cnt
+{
+    width: 63%;
+    border: 1px solid rgba(130, 130, 130, 0.644);
+    background-color: rgba(163, 163, 163, 0.066);
+    margin-left: 11%;
+    border-radius: 4px;
+    margin-top: 1%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+.cust-det-cnt
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.details
+{
+    height: 90%;
+    width: 98%;
+    padding: 1%;
+
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.name-mobile-cnt
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.field-cnt{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.ip{
+   width: 70%;
+   height: 25px;
+}
+.address-cnt
+{
+margin-left: 5%;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+gap: 10px;
+}
+.address-ip
+{
+    width: 70%;
+    height: 80px;
+    resize: none;
+}
+.city-town
+{
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.type{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    div{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+.checkout-btn
+{
+    display: flex;
+    //align-items: end;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: end;
+    // margin-right: 20px;
+}
