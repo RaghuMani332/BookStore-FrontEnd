@@ -9,7 +9,7 @@ import { LoginComponent } from './Component/login/login.component';
 
 const routes: Routes = [
   {
-    path:"login",
+    path:'login',
     component:LoginComponent
   },
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
       component:BookdetailsComponent
     },
     {
-      path:'cart/:flag',
+      path:'cart',
       component:CartComponent
     },
     {

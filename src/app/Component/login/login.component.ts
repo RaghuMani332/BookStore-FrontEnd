@@ -69,7 +69,7 @@
 // }
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpserviceService } from 'src/app/Service/httpService/httpservice.service';
 
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   loginSignupOpt:boolean = false;
   hide = true;
 
-  constructor(private httpservice: HttpserviceService, private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data: {val: string},private route:Router) { }
+  constructor(private httpservice: HttpserviceService, private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data: {val: string},private route:Router,public dialogRef: MatDialogRef<LoginComponent>) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -129,19 +129,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
+    this.dialogRef.close();
     const { username, password } = this.loginForm.value;
     this.httpservice.login(username, password).subscribe(res =>{
        localStorage.setItem('authToken', res.data)
-      //  console.log(...this.data.name);
-       console.log(this.data);
-       console.log(this.data.val);
        
-       
-       
-       if(this.data.val=='placeOrder')
+      // this.route.navigate([''])
+
+
+        if(this.data.val!='placeOrder')
         {
-          this.route.navigate(['/cart/true'])
+          window.location.reload();
         }
+        // this.dialogRef.close();
+
       });
     
   }
@@ -159,10 +161,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
-    // this.dialogRef.close();
-  }
-
+  
+  
   goToLogin() {
     this.activeTab = 'login';
   }
@@ -170,22 +170,22 @@ export class LoginComponent implements OnInit {
   goToSignUp() {
     this.activeTab = 'signup';
   }
-  loginmeth()
-  {
-    this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
-      localStorage.setItem('authToken', res.data)
-     //  console.log(...this.data.name);
-      console.log(this.data);
-      console.log(this.data.val);
+  // loginmeth()
+  // {
+  //   this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
+  //     localStorage.setItem('authToken', res.data)
+  //    //  console.log(...this.data.name);
+  //     console.log(this.data);
+  //     console.log(this.data.val);
       
       
       
-      if(this.data.val=='placeOrder')
-       {
+  //     if(this.data.val=='placeOrder')
+  //      {
         
-         this.route.navigate(['/cart/true'])
-       }
-     });
+  //        this.route.navigate(['/cart'])
+  //      }
+  //    });
    
-  }
+  // }
 }

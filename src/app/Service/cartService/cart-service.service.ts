@@ -12,13 +12,17 @@ export class CartServiceService {
   {
     return this.httpService.getAllCart();
   }
-  addToCartApiCall(data:{quantity:number,bookId:number})
+  getAllCartApiCallThroughToken(token:string)
   {
-    return this.httpService.addToCart(data)
+    return this.httpService.getAllCartThroughToken(token);
   }
-  updateQuantityToCartApiCall(cartId:number,quantity:number)
+  addToCartApiCall(data:{quantity:number,bookId:number},token?:string)
   {
-    return this.httpService.updateQuantiyToCart(cartId,quantity);
+    return this.httpService.addToCart(data,token)
+  }
+  updateQuantityToCartApiCall(cartId:number,quantity:number,token?:string)
+  {
+    return this.httpService.updateQuantiyToCart(cartId,quantity,token);
   }
   unCartItem(cartId:number)
   {

@@ -25,12 +25,24 @@ export class HttpserviceService {
   {
     return this.httpService.get<any>("https://localhost:7098/api/Cart",{headers:this.authHeader})
   }
-  addToCart(data:{quantity:number,bookId:number}):Observable<any>
+  getAllCartThroughToken(token:string):Observable<any>
   {
+    return this.httpService.get<any>("https://localhost:7098/api/Cart",{headers:new HttpHeaders({Authorization:`Bearer ${token}`})})
+  }
+  addToCart(data:{quantity:number,bookId:number},token?:string):Observable<any>
+  {
+    if(token!=null)
+      {
+        return this.httpService.post<any>('https://localhost:7098/api/Cart',{...data},{headers:new HttpHeaders({Authorization:`Bearer ${token}`})})
+      }
     return this.httpService.post<any>('https://localhost:7098/api/Cart',{...data},{headers:this.authHeader})
   }
-  updateQuantiyToCart(cartId:number,quantity:number):Observable<any>
+  updateQuantiyToCart(cartId:number,quantity:number,token?:string):Observable<any>
   {
+    if(token!=null)
+      {
+        return this.httpService.put<any>(`https://localhost:7098/api/Cart/${cartId}/${quantity}`,{},{headers:new HttpHeaders({Authorization:`Bearer ${token}`})})
+      }
     return this.httpService.put<any>(`https://localhost:7098/api/Cart/${cartId}/${quantity}`,{},{headers:this.authHeader})
   }
   unCartItem(cartId:number):Observable<any>

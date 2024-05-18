@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     err=>console.log(err))
   }
   openDialog() {
-    this.dialog.open(LoginComponent);
+    this.dialog.open(LoginComponent)
   }
   logout()
   {
