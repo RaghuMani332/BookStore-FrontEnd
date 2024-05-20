@@ -17,7 +17,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
 
   book: any = [];
 
-
+  isWishList:boolean=false;
   bookId!: number
 
   count: number = 1;

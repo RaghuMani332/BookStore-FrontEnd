@@ -20,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CustomerDetailsComponent } from './Component/customer-details/customer-details.component';
+import { OrderListComponent } from './Component/order-list/order-list.component';
+import { WishListComponent } from './Component/wish-list/wish-list.component';
 
 
 
@@ -36,7 +38,9 @@ import { CustomerDetailsComponent } from './Component/customer-details/customer-
     BookdetailsComponent,
     CartComponent,
     LoginComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    OrderListComponent,
+    WishListComponent
   ],
   imports: [
     

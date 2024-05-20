@@ -53,4 +53,8 @@ export class HttpserviceService {
   {
     return this.httpService.get<any>(`https://localhost:7098/api/Book/getNameByToken`,{headers:this.authHeader})
   }
+  getWishList():Observable<any>
+  {
+    return this.httpService.get<any>(`https://localhost:7098/api/WishList`,{headers:this.authHeader})
+  }
 }

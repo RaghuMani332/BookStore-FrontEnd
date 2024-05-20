@@ -71,6 +71,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CartServiceService } from 'src/app/Service/cartService/cart-service.service';
 import { HttpserviceService } from 'src/app/Service/httpService/httpservice.service';
 
 @Component({
@@ -79,14 +80,15 @@ import { HttpserviceService } from 'src/app/Service/httpService/httpservice.serv
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  templist:any;
+  cartList:any;
 
   loginForm!: FormGroup;
   signupForm!: FormGroup;
   loginSignupOpt:boolean = false;
   hide = true;
 
-  constructor(private httpservice: HttpserviceService, private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data: {val: string},private route:Router,public dialogRef: MatDialogRef<LoginComponent>) { }
+  constructor(private httpservice: HttpserviceService, private fb: FormBuilder,@Inject(MAT_DIALOG_DATA) public data: {val: string,cart:any},private route:Router,public dialogRef: MatDialogRef<LoginComponent>,private cartService:CartServiceService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -138,15 +140,46 @@ export class LoginComponent implements OnInit {
       // this.route.navigate([''])
 
 
-        if(this.data.val!='placeOrder')
+        if(this.data.val=='placeOrder')
         {
-          window.location.reload();
+          this.cartList=this.data.cart;
+          this.templist=this.cartList;
+          console.log(this.templist);
+           
+            var v=localStorage.getItem('authToken')+'';
+            
+            this.cartService.getAllCartApiCallThroughToken(v).subscribe(res => {
+              this.cartList = res
+              this.cartList= this.cartList.filter((ele:any)=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
+                console.log(this.cartList);
+    
+              console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
+              window.location.reload()
+            },err=>console.log(err)
+          )
+          // window.location.reload();
         }
         // this.dialogRef.close();
 
       });
     
   }
+  updateCart(a: any, b: any,token?:any) {
+    for (const itemA of a) {
+      const itemB = b.find((item:any) => item.bookId === itemA.bookId);
+      if (itemB) {
+          itemB.quantity += itemA.quantity;
+          this.cartService.updateQuantityToCartApiCall(itemB.cartId,itemB.quantity,token).subscribe(res=>console.log(res)
+        )
+
+      } else {
+          b.push(itemA);
+          this.cartService.addToCartApiCall({bookId:itemA.bookId,quantity:itemA.quantity},token).subscribe(res=>console.log(res)
+          )
+      }
+  }
+  return b;
+}
 
   signupmeth() {
     if (this.signupForm.valid) {
