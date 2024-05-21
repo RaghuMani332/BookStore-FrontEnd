@@ -1,0 +1,26 @@
+
+<div class="orderlist-main-cnt">
+    <!-- <div class="heading-content">
+        <div class="orderlist-items">
+           <span class="home" routerLink="/books">Home / </span>
+           <span class="items">My OrderList</span>
+        </div>
+    </div> -->
+    <div class="orderlist-cnt" *ngFor="let order of orderList" >
+                <div class="content" >
+                    <div class="book-img">
+                       <img src="{{ order?.BookImage }}" alt="">
+                    </div>
+                    <div class="cart-detail">
+                        <span class="booktitle">{{order?.BookName}}</span>
+                        <span style="color: #818181;">{{order?.authorName}}</span>
+                        <div class="rating-cnt">
+                            <span class="sellingprice"><b>Rs.{{order?.price}}    </b><span class="offer">Rs.1999</span></span>
+                        </div>
+                    </div>  
+                    <div class="ordered-date">
+                        <span><b>Order Placed on {{order.orderDate}}</b></span>
+                    </div>
+                </div>
+            </div>
+    </div>

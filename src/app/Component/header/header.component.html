@@ -1,8 +1,8 @@
 <div class="header-main-cnt">
     <div class="header">
-     <div class="bookstore-icon">
+     <div class="bookstore-icon" routerLink="">
         <mat-icon class="book-icon" svgIcon="book-icon" aria-hidden="false" aria-label="Note SVG icon"></mat-icon>
-       <span>BookStore</span>
+       <span >BookStore</span>
     </div>
 
     <div class="search-container">
@@ -15,15 +15,25 @@
         
             <button  mat-button [matMenuTriggerFor]="menu" #menuTrigger>  <div class="btn"><mat-icon class="profile-icon"  svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon></div>{{userName}} </button>
             <mat-menu #menu="matMenu">
-                <div class="profile-main-cnt">
+                <div class="profile-main-cnt" *ngIf="loggedout ; else loggedIn">
                     Welcome
                     <div>To access account and manage order</div>
-                    <div><button mat-stroked-button color="warn"> <button mat-button (click)="openDialog()">&nbsp; LOGIN/SIGNUP &nbsp;</button>
+                    <div><button mat-stroked-button color="warn" (click)="openDialog()"> &nbsp; LOGIN/SIGNUP &nbsp;</button>
+                    </div>
+                    <hr>
+                    
+                    <!-- <div routerLink="wishList" >Wishlist</div> -->
+                </div>
+                <ng-template #loggedIn>
+                    <div class="profile-main-cnt">
+
+                    <div><button mat-stroked-button color="warn"> <button mat-button (click)="logout()">&nbsp; LOGOUT &nbsp;</button>
                     </button></div>
                     <hr>
-                    <div>My Orders</div>
-                    <div>Wishlist</div>
+                    <div routerLink="orderList">My Orders</div>
+                    <div routerLink="wishList" >Wishlist</div>
                 </div>
+                </ng-template>
               <!-- <button mat-menu-item (click)="openDialog()"></button> -->
             </mat-menu>
         
@@ -36,7 +46,7 @@
             
         </div>
     </div>
-    <button (click)="logout()">logout</button>
+    <!-- <button (click)="logout()">logout</button> -->
 </div>
 </div>
 <!-- ----------------------------------------------------- -->

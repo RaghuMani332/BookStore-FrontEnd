@@ -6,6 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpserviceService {
+  
+  
+  
+
+ 
 
   private authHeader=new HttpHeaders({Authorization:`Bearer ${localStorage.getItem('authToken')}`})
 
@@ -52,5 +57,38 @@ export class HttpserviceService {
   getNamebyToken():Observable<any>
   {
     return this.httpService.get<any>(`https://localhost:7098/api/Book/getNameByToken`,{headers:this.authHeader})
+  }
+  getWishList():Observable<any>
+  {
+    return this.httpService.get<any>(`https://localhost:7098/api/WishList`,{headers:this.authHeader})
+  }
+  addWishList(BookId:number):Observable<any>{
+    // const requestBody = { bookId: bookId};
+    return this.httpService.post(`https://localhost:7098/api/WishList`,{bookId: BookId},{headers:this.authHeader})
+  }
+  deleteWishList(wishListId:number):Observable<any>
+  {
+    return this.httpService.delete(`https://localhost:7098/api/WishList?wishListId=${wishListId}`,{headers:this.authHeader})
+  }
+  removeAddress(addressId:number):Observable<any>
+  {
+    return this.httpService.delete(`https://localhost:7098/api/Address?addressId=${addressId}`,{headers:this.authHeader})
+  }
+  getAddress():Observable<any>
+  {
+    return this.httpService.get(`https://localhost:7098/api/Address`,{headers:this.authHeader})
+  }
+  updatAddress(userData: any, addressId: any):Observable<any> {
+    return this.httpService.put(`https://localhost:7098/api/Address?addressId=${addressId}`,{userData},{headers:this.authHeader})
+  }
+  addAddress(userData: any):Observable<any> {
+    userData.type=Number(userData.type)
+    return this.httpService.post(`https://localhost:7098/api/Address`,{...userData},{headers:this.authHeader})
+  }
+  addOrder(orderBody: { addressId: any; orderDate: string; bookId: any; }):Observable<any> {
+    return this.httpService.post(`https://localhost:7098/api/Order`,{...orderBody},{headers:this.authHeader})
+  }
+  getAllOrder():Observable<any> {
+    return this.httpService.get(`https://localhost:7098/api/Order/GetOrder`,{headers:this.authHeader})
   }
 }

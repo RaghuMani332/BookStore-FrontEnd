@@ -5,13 +5,12 @@ import { BookdetailsComponent } from './Component/bookdetails/bookdetails.compon
 import { CartComponent } from './Component/cart/cart.component';
 import { CustomerDetailsComponent } from './Component/customer-details/customer-details.component';
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
-import { LoginComponent } from './Component/login/login.component';
+import { OrderListComponent } from './Component/order-list/order-list.component';
+import { OrderPlacedComponent } from './Component/order-placed/order-placed.component';
+import { WishListComponent } from './Component/wish-list/wish-list.component';
 
 const routes: Routes = [
-  {
-    path:'login',
-    component:LoginComponent
-  },
+ 
   {
     path:"",
     component:DashboardComponent,
@@ -30,6 +29,22 @@ const routes: Routes = [
     {
       path:'customerDetails/:cartId',
       component:CustomerDetailsComponent
+    },
+    {
+      path:'orders',
+      component:OrderListComponent
+    },
+    {
+      path:'wishList',
+      component:WishListComponent
+    },
+    {
+      path:'orderList',
+      component:OrderListComponent
+    },
+    {
+      path:'orderPlaced/:orderId',
+      component:OrderPlacedComponent
     }
   ]
   }

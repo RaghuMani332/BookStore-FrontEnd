@@ -1,91 +1,137 @@
 <div class="cart-outer-cnt">
     <br>
     <div class="count-cnt">
-        <span>My cart(1)</span>
-        <div class="loc-icon-cnt"><span class="loc-icon"> <mat-icon svgIcon="location-icon"></mat-icon>
-                BridgeLabzSolution LLP,No... <mat-icon svgIcon="drop-down-icon"></mat-icon></span></div>
+        <span><b>My cart()</b></span>
+        <div class="loc-icon-cnt">
+            <span class="loc-icon">
+                <mat-icon svgIcon="location-icon"></mat-icon>
+                Premkumar,Sillarahalli,No...
+                <mat-icon svgIcon="drop-down-icon"></mat-icon>
+            </span>
+        </div>
     </div>
     <br>
     <div class="img-cnt">
-
         <div class="content">
-            <img src="{{Book.bookImage}}" alt="">
-            <div>
-                <span class="booktitle">{{Book.bookName}}</span>
-                <span style="color: #616161;">{{Book.authorName}}</span>
+            <img [src]="cartList.bookImage" alt="">
+            <div class="cart-detail">
+                <span class="booktitle">{{cartList.bookName}}</span>
+                <span style="color: #818181;">{{cartList.authorName}}</span>
                 <div class="rating-cnt">
-                    <span class="sellingprice">Rs.{{Book.price}}<span class="originalprice">Rs.2000</span></span>
-                    <div class="count">
-                        <span class="increament" (click)="handlecount('minus',Book)">-</span> <span
-                            class="countvalue">{{Book.quantity}}</span> <span class="increament"
-                            (click)="handlecount('add',Book)">+</span>
+                    <span class="sellingprice">Rs.{{cartList.price}}
+                        <span class="originalprice">Rs.1999</span>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="address-detail">
+    <div class="list-of-adderss">
+        <div class="address-header">
+            <span>Customer Details</span>
+            <button mat-stroked-button color="warn" (click)="editAddress(emptyAddress)">Add New Address</button>
+        </div>
+        <div class="address-main" *ngFor="let address of addressList">
+            <div class="old-address">
+                <div>{{address.name}}</div>
+                <div>{{address.address}}</div>
+                <div>{{address.city}}, {{address.state}}</div>
+                <div>{{address.mobileNumber}}</div>
+            </div>
+            <div class="address-btn">
+                <button mat-raised-button color="primary" (click)="editAddress(address)" class="continue-btn">EDIT
+                    ADDRESS</button>
+                <button mat-raised-button color="primary" (click)="removeAddress(address.addressId)"
+                    class="continue-btn">REMOVE ADDRESS</button>
+                <button mat-raised-button color="primary" (click)="orderAddress(address)">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="address-detail" *ngIf="!editaddress">
+    <div class="address-header">
+        <span>Customer Details</span>
+    </div>
+    <form [formGroup]="addressForm">
+        <div class="customer-address">
+            <div class="name-mobile-cnt">
+                <div class="field-cnt">
+                    <div class="value">Full Name</div>
+                    <div>
+                        <input type="text" formControlName="name" placeholder="eg:abc" class="input-cnt">
+                    </div>
+                </div>
+                <div class="field-cnt">
+                    <div class="value">Mobile Number</div>
+                    <div>
+                        <input type="tel" formControlName="mobileNumber" placeholder="eg:1234567890" class="input-cnt">
                     </div>
                 </div>
             </div>
-
+            <div class="address-cnt">
+                <div class="value">Address</div>
+                <textarea formControlName="address" placeholder="eg:address"></textarea>
+            </div>
+            <div class="city-town">
+                <div class="field-cnt">
+                    <div class="value">City/Town</div>
+                    <div>
+                        <input type="text" formControlName="city" placeholder="eg:Dharmapuri" class="input-cnt">
+                    </div>
+                </div>
+                <div class="field-cnt">
+                    <div class="value">State</div>
+                    <div>
+                        <input type="text" formControlName="state" placeholder="eg:Tamilnadu" class="input-cnt">
+                    </div>
+                </div>
+            </div>
+            <div class="type">
+                <div class="value">Type</div>
+                <div class="type-list">
+                    <div>
+                        <input type="radio" name="type" formControlName="type" value="0"> Home
+                    </div>
+                    <div>
+                        <input type="radio" name="type" formControlName="type" value="1"> Work
+                    </div>
+                    <div>
+                        <input type="radio" name="type" formControlName="type" value="2"> Other
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="button" mat-raised-button color="primary" (click)="clearCart(Book)">Clear</button>
+        <div class="continue">
+            <button mat-raised-button color="primary" class="continue-btn" (click)="handleaddress()">CONTINUE</button>
+        </div>
+    </form>
+</div>
 
-        <!-- <button class="button" mat-raised-button color="primary" (click)="handlePlaceOrder(book)">PLACE ORDER</button> -->
-
-
+<br>
+<div class="cart-outer-cnt">
+    <div class="address-header"><span>Order Summary</span></div>
+    <div *ngIf="!order">
+        <div class="img-cnt">
+            <div class="content">
+                <img [src]="cartList.bookImage" alt="">
+                <div class="cart-detail">
+                    <span class="booktitle">{{cartList.bookName}}</span>
+                    <span style="color: #818181;">{{cartList.authorName}}</span>
+                    <div class="rating-cnt">
+                        <span class="sellingprice">Rs.{{cartList.price}}
+                            <span class="originalprice">Rs.1999</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="continue">
+            <button mat-raised-button color="primary" class="continue-btn" (click)="handleOrder()">CHECKOUT</button>
+        </div>
     </div>
 </div>
-<div class="customer-details-outer-cnt">
-    <div class="cust-det-cnt">
-        <div>
-            &nbsp; &nbsp; &nbsp;  Customer Details
-        </div>
-        <div>
-            <button mat-stroked-button color="warn">ADD NEW ADDRESS</button>
-        </div>
-    </div>
-    <div class="details">
-        <div class="name-mobile-cnt">
-            <div class="field-cnt">
-                <div>FullName</div>
-                <div><input type="text" class="ip" placeholder="name"></div>
-            </div>
-            <div class="field-cnt">
-                <div>MobileNumber</div>
-                <div><input type="tel" class="ip"></div>
-            </div>
-        </div>
-        <div class="address-cnt">
-            <div>Address</div>
-            
-            <div> <textarea class="address-ip" placeholder="Enter your address here">5, 14th A Main Rd, Sector 4, HSR Layout, Bengaluru, Karnataka 560102
-                BridgeLabz Solutions Bengalulru, address</textarea></div>
-        </div>
-        <div class="city-town">
-            <div class="field-cnt">
-                <div>City</div>
-                <div><input type="text" class="ip" placeholder="city"></div>
-            </div>
-            <div class="field-cnt">
-                <div>State</div>
-                <div><input type="tel" class="ip" placeholder="state"></div>
-            </div>
-        </div>
-        <div class="type" >
-            Type
-            <div >
-        
-                <div>
-                   <input type="radio" name="address">Home
-                </div>
-                <div>
-                    <input type="radio" name="address" >Office
-                </div>
-                 <div>
-                    <input type="radio" name="address">others
-                </div> 
-            </div>
-        </div>
-        <div class="checkout-btn">
-                <button mat-raised-button color="primary">Continue</button>
-        </div>
-       
-    </div>
-</div>
-<div class="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Order Summer</div>

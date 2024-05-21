@@ -103,52 +103,73 @@ export class CartComponent implements OnInit {
         this.dataservice.changeOrderBookState(data);
         this.route.navigate(['/customerDetails',data.cartId])
       }
-      else{
-        // this.openDialog(choice)
-        this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
-          localStorage.setItem('authToken', res.data)
-          this.templist=this.cartList;
-        console.log(this.templist);
-          console.log(localStorage.getItem('authToken'));
+      // else{
+      //   this.openDialog(choice)
+      //   this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
+      //     localStorage.setItem('authToken', res.data)
+      //     this.templist=this.cartList;
+      //   console.log(this.templist);
+      //     console.log(localStorage.getItem('authToken'));
           
-          this.cartService.getAllCartApiCallThroughToken(res.data).subscribe(res => {
-            this.cartList = res
-            this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
-              console.log(this.cartList);
+      //     this.cartService.getAllCartApiCallThroughToken(res.data).subscribe(res => {
+      //       this.cartList = res
+      //       this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
+      //         console.log(this.cartList);
   
-            console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
-            window.location.reload()
-          },err=>console.log(err)
-          )
+      //       console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
+      //       window.location.reload()
+      //     },err=>console.log(err)
+      //     )
   
         
         
-        })
+      //   })
+      //   //------------------------
+       
+
+      // }
+      else{
+        this.openDialog('placeOrder',this.cartList)
+        
+        //   this.templist=this.cartList;
+        // console.log(this.templist);
+        //   console.log(localStorage.getItem('authToken'));
+        //   var v=localStorage.getItem('authToken')+'';
+          
+        //   this.cartService.getAllCartApiCallThroughToken(v).subscribe(res => {
+        //     this.cartList = res
+        //     this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
+        //       console.log(this.cartList);
+  
+        //     console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
+        //     window.location.reload()
+        //   },err=>console.log(err)
+        // )
         //------------------------
        
 
       }
 
   }
-  openDialog(choice:any) {
-    this.dialog.open(LoginComponent,{data:{val:choice}});
+  openDialog(choice:any,cartitem:any) {
+    this.dialog.open(LoginComponent,{data:{val:choice,cart:cartitem}});
   }
 
-   updateCart(a: any, b: any,token?:any) {
-    for (const itemA of a) {
-      const itemB = b.find((item:any) => item.bookId === itemA.bookId);
-      if (itemB) {
-          itemB.quantity += itemA.quantity;
-          this.cartService.updateQuantityToCartApiCall(itemB.cartId,itemB.quantity,token).subscribe(res=>console.log(res)
-        )
+//    updateCart(a: any, b: any,token?:any) {
+//     for (const itemA of a) {
+//       const itemB = b.find((item:any) => item.bookId === itemA.bookId);
+//       if (itemB) {
+//           itemB.quantity += itemA.quantity;
+//           this.cartService.updateQuantityToCartApiCall(itemB.cartId,itemB.quantity,token).subscribe(res=>console.log(res)
+//         )
 
-      } else {
-          b.push(itemA);
-          this.cartService.addToCartApiCall({bookId:itemA.bookId,quantity:itemA.quantity},token).subscribe(res=>console.log(res)
-          )
-      }
-  }
-  return b;
-}
+//       } else {
+//           b.push(itemA);
+//           this.cartService.addToCartApiCall({bookId:itemA.bookId,quantity:itemA.quantity},token).subscribe(res=>console.log(res)
+//           )
+//       }
+//   }
+//   return b;
+// }
 
 }
