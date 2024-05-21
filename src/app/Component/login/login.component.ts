@@ -1,72 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormControl, FormGroup, Validators } from '@angular/forms';
-// import { HttpserviceService } from 'src/app/Service/httpService/httpservice.service';
 
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.scss']
-// })
-// export class LoginComponent implements OnInit {
-
-//   loginForm!: FormGroup;
-//   signupForm!: FormGroup;
-//   loginSignupOpt:boolean=false;
-//   username:string='';
-//   pass:string='';
-//   hide = true;
-
-//   constructor(private httpservice:HttpserviceService) { }
-
-//   ngOnInit(): void {
-//   }
-//   email = new FormControl('', [Validators.required, Validators.email]);
-
-//   get signupControl() 
-//   {
-//    return this.signupForm.controls; 
-//  }
-
-//   getErrorMessage() {
-//     if (this.email.hasError('required')) {
-//       return 'You must enter a value';
-//     }
-
-//     return this.email.hasError('email') ? 'Not a valid email' : '';
-//   }
-
-
-//   activeTab: string = 'login'; 
-
-//   setActiveTab(tab: string) {
-//     this.activeTab = tab;
-//   }
-
-
-
-
-
-
-
-
-
-
-//   loginmeth()
-//   {
-//     this.httpservice.login(this.username,this.pass).subscribe(res=>localStorage.setItem('authToken',res.data))
-
-//   }
-//   onNoClick(): void {
-//     // this.dialogRef.close();
-//   }
-// goToLogin(){
-// //  this.login=true;
-// }
-// goToSignUp(){
-// //  this.login=false;
-// }
-
-// }
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -137,7 +69,6 @@ export class LoginComponent implements OnInit {
     this.httpservice.login(username, password).subscribe(res =>{
        localStorage.setItem('authToken', res.data)
        
-      // this.route.navigate([''])
 
 
         if(this.data.val=='placeOrder')
@@ -159,7 +90,6 @@ export class LoginComponent implements OnInit {
           )
           // window.location.reload();
         }
-        // this.dialogRef.close();
 
       });
     
@@ -203,22 +133,4 @@ export class LoginComponent implements OnInit {
   goToSignUp() {
     this.activeTab = 'signup';
   }
-  // loginmeth()
-  // {
-  //   this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
-  //     localStorage.setItem('authToken', res.data)
-  //    //  console.log(...this.data.name);
-  //     console.log(this.data);
-  //     console.log(this.data.val);
-      
-      
-      
-  //     if(this.data.val=='placeOrder')
-  //      {
-        
-  //        this.route.navigate(['/cart'])
-  //      }
-  //    });
-   
-  // }
 }

@@ -1,108 +1,6 @@
-<!-- <div class="login-outer-cnt">
-    
-    <div class="login-img">
-        <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A634ba680-536e-4b6f-b4a3-41986b9b22f5&params=version%3A0&token=1715680101_da39a3ee_7355e0617a3e07f3f361384055f9da818b436092&api_key=CometServer1" alt="">
-    </div>
-    <div class="login-cnt">
-        <div>
-            <span (click)="toggleBorder('login')">Login</span>
-            <span (click)="toggleBorder('signup')">SignUp</span>
-        </div>
-    </div>
-</div>
-
-
-<button (click)="loginmeth()">login</button>
- -->
- <!-- <div class="login-outer-cnt">
-    <div class="login-img">
-        <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A634ba680-536e-4b6f-b4a3-41986b9b22f5&params=version%3A0&token=1715680101_da39a3ee_7355e0617a3e07f3f361384055f9da818b436092&api_key=CometServer1" alt="">
-    </div>
-    <div class="login-cnt">
-       
-            <div class="login-cnt-inner">
-                <span [ngClass]="{ 'active': activeTab === 'login' }" (click)="setActiveTab('login')">LOGIN</span>
-                <span [ngClass]="{ 'active': activeTab === 'signup' }" (click)="setActiveTab('signup')">SIGNUP</span>
-            </div>
-            <div *ngIf="loginSignupOpt ; else signup ">
-            <br>
-            <div class="inputs">
-                <div class="email-input">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Enter your email</mat-label>
-                      <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                  
-                <div class="password-input">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Enter your password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                      </mat-form-field>
-    
-                </div>
-                <button class="login-btn" mat-raised-button color="primary">Login</button>
-    
-                <br>
-                --------------------------- &nbsp; &nbsp; OR &nbsp; &nbsp; ---------------------------
-            </div>
-            <br><br>
-            <div class="other-login">
-                <button  mat-raised-button color="primary">FaceBook</button>
-                <button  mat-raised-button color="primary">Google</button>
-    
-            </div>
-        </div>
-        <ng-template #signup>
-            <div class="sign-up">
-                <div style="border: 1px solid; width: 70%;">
-                    <mat-form-field appearance="outline">
-                        <mat-label>First Name</mat-label>
-                        <input matInput placeholder="First Name" formControlName="FirstName">
-                        <mat-error *ngIf="loginForm.get('FirstName')?.hasError('required')">First Name is required</mat-error>
-                        <mat-error *ngIf="loginForm.get('FirstName')?.hasError('pattern')">Incorrect First Name format</mat-error>
-                    </mat-form-field>
-                </div>
-                <div style=" width: 70%;">
-                    <label><b>Full Name</b></label>
-                    <input type="text" class="input" placeholder="Enter Name" formControlName="fullName">
-                    <mat-error *ngIf="signupControl['fullName'].invalid && (signupControl['fullName'].dirty || signupControl['fullName'].touched)">Full name is required</mat-error>            
-                </div>
-                <div style="border: 1px solid; width: 70%;">
-                    Password
-                    <input type="text" style="border: 1px solid; width: 100%;">
-                </div>
-                <div sclass="sign-up-fields">
-                    MobileNumber
-                    <input type="text" style="border: 1px solid; width: 100%;">
-                </div>
-                <div class="sign-up-fields">
-                    FullName
-                    <input type="text" style="border: 1px solid; width: 100%;">
-                </div>
-                
-                <div style="border: 1px solid; width: 70%;">
-                    
-                    <button style="width: 100%;" mat-raised-button color="primary">Signup</button>
-
-                </div>
-            </div>
-        </ng-template>
-        
-    </div>
-</div>
-
-<button (click)="loginmeth()">login</button> -->
-
-  
-
 <div class="login-outer-cnt">
   <div class="login-img">
-    <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A634ba680-536e-4b6f-b4a3-41986b9b22f5&params=version%3A0&token=1715680101_da39a3ee_7355e0617a3e07f3f361384055f9da818b436092&api_key=CometServer1" alt="">
+    <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A85534115-ba16-412e-b646-6dd43d839dd8&params=version%3A0&token=1716363155_da39a3ee_8f3e437e7efab007746b5f58e5c639c163c86c56&api_key=CometServer1" alt="">
   </div>
   <div class="login-cnt">
     <div class="login-cnt-inner">
@@ -131,7 +29,6 @@
           </mat-form-field>
         </div>
         <button class="login-btn" mat-button (click)="login()">&nbsp; LOGIN &nbsp;</button>
-        <!-- <button class="login-btn" mat-raised-button color="primary" (click)="login()">Login</button> -->
         <br>
         --------------------------- &nbsp; &nbsp; OR &nbsp; &nbsp; ---------------------------
       </form>
@@ -180,5 +77,4 @@
 </div>
 
 
-<!-- <button (click)="loginmeth()">login!</button> -->
 

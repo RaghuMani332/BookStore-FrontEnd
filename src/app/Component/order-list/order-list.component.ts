@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpserviceService } from 'src/app/Service/httpService/httpservice.service';
 
 @Component({
   selector: 'app-order-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor() { }
+  orderList! : any[];
+  constructor(private httpService:HttpserviceService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('authToken') != null) {
+      this.httpService.getAllOrder().subscribe(res=>{
+      this.orderList=res
+    },err=>console.log(err))
+    
+  }
   }
 
 }

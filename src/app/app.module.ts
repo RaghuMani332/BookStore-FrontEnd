@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CustomerDetailsComponent } from './Component/customer-details/customer-details.component';
 import { OrderListComponent } from './Component/order-list/order-list.component';
 import { WishListComponent } from './Component/wish-list/wish-list.component';
+import { OrderPlacedComponent } from './Component/order-placed/order-placed.component';
 
 
 
@@ -40,7 +41,8 @@ import { WishListComponent } from './Component/wish-list/wish-list.component';
     LoginComponent,
     CustomerDetailsComponent,
     OrderListComponent,
-    WishListComponent
+    WishListComponent,
+    OrderPlacedComponent,
   ],
   imports: [
     

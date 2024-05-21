@@ -3,6 +3,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { WishListService } from 'src/app/Service/WishList/wish-list.service';
 import { CartServiceService } from 'src/app/Service/cartService/cart-service.service';
 import { DataServiceService } from 'src/app/Service/dataService/data-service.service';
 import { Book } from 'src/assets/BookObjectInterface';
@@ -16,8 +17,8 @@ import { HEART_ICON, STAR_ICON, STAR_ICON_BLACK, STAR_ICON_YELLOW } from 'src/as
 export class BookdetailsComponent implements OnInit, OnDestroy {
 
   book: any = [];
-
-  isWishList:boolean=false;
+  wishList:any;
+  isWishList:boolean=true;
   bookId!: number
 
   count: number = 1;
@@ -26,7 +27,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   cartId!: number;
   tempcart: any[] = [];
   subscription: Subscription = new Subscription();
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private dataservice: DataServiceService, private cartservice: CartServiceService, private route: ActivatedRoute) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private dataservice: DataServiceService, private cartservice: CartServiceService, private route: ActivatedRoute,private wishListService:WishListService) {
     iconRegistry.addSvgIconLiteral("heart-icon", sanitizer.bypassSecurityTrustHtml(HEART_ICON)),
       iconRegistry.addSvgIconLiteral("star_icon", sanitizer.bypassSecurityTrustHtml(STAR_ICON)),
       iconRegistry.addSvgIconLiteral("star_icon_black", sanitizer.bypassSecurityTrustHtml(STAR_ICON_BLACK)),
@@ -41,6 +42,20 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
       this.route.params.subscribe(res2 => {
         this.Selectedbook = res1.filter(e => e.bookId == res2['bookId'])[0]
       })
+      if(localStorage.getItem('authToken')!=null){
+      this.wishListService.getAllWishListApiCall().subscribe(res3=>{this.wishList=res3
+        console.log(res3);
+        console.log(...res3);
+        this.wishList.filter((e:any)=>{
+          console.log(e);
+          if(e.bookId==this.Selectedbook.bookId)
+            {
+              this.isWishList=false;
+            }
+  
+        })
+      })
+    }
     })
 
 
@@ -76,6 +91,11 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleWishList(bookId:number)
+  {
+    this.isWishList=false;
+    this.wishListService.addWishListApiCall(bookId).subscribe(res=>console.log(res))
+  }
 
 
   handlecount(data: string, cart?: any) {

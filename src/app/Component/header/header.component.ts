@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
 
   page:string='MyCart'
   userName!:string;
+loggedout: boolean=true;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,public dialog: MatDialog,private bookservice:BookServiceService,private dataService:DataServiceService,private userService:UserServiceService) {
     iconRegistry.addSvgIconLiteral("book-icon", sanitizer.bypassSecurityTrustHtml(BOOK_ICON)),
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem('authToken'))
       {
+        this.loggedout=false
         this.userService.getNameByTokenApiCall().subscribe(res=>{this.userName=res.data 
         })
       }
@@ -46,5 +48,6 @@ export class HeaderComponent implements OnInit {
   logout()
   {
     localStorage.clear();
+    window.location.reload();
   }
 }

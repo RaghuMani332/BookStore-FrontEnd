@@ -1,4 +1,4 @@
-<div class="wishlist-main-cnt">
+<!-- <div class="wishlist-main-cnt">
 
     <div class="wishlist-cnt">
             <div class="address-header"><span>MyWishlist()</span></div>
@@ -18,4 +18,33 @@
                     </div>
                 </div>
             </div>
-    </div>
+    </div> -->
+
+    <div class="wishlist-main-cnt">
+        <div class="heading-content">
+            <div class="wishlist-items">
+               <span class="home" routerLink="/books">Home / </span>
+               <span class="items">My WishList</span>
+            </div>
+        </div>
+        <div class="wishlist-cnt"  >
+                <div class="address-header"><span>MyWishlist()</span></div>
+                    <div class="content" *ngFor="let book of wishList">
+                        <div class="book-img">
+                           <img src="{{ book.BookImage}}" alt="">
+                        </div>
+                        <div class="cart-detail">
+                            <span class="booktitle">{{book.BookName}}</span>
+                            <span style="color: #818181;">{{book.AuthorName}}</span>
+                            <div class="rating-cnt">
+                                <span class="sellingprice"><b>Rs.{{book.Price}}    </b><span class="offer">Rs.1999</span></span>
+                            </div>
+                        </div>  
+                        <div class="delete-icon">
+                            <mat-icon class="search-icon" svgIcon="delete-icon" aria-hidden="false" aria-label="Search SVG icon" (click)="removeWishList(book.WishListId)"></mat-icon>
+                        </div>
+                        
+                    </div>
+
+                </div>
+        </div>
