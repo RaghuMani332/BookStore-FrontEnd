@@ -51,7 +51,7 @@
 </div>
 <!-- ----------------------------------------------------- -->
 <div *ngIf="false; else nav"  class="book-main-cnt">
-    <div class="items">
+    <div routerLink="" class="items">
         <span class="book">Books</span>
         <span>(128items)</span>
     </div>
@@ -69,9 +69,9 @@
 </div>
 <ng-template #nav>
     <div  class="book-main-cnt">
-        <div class="items">
-            <span class="home">Home /</span>
-            <span><b>{{page}}</b></span>
+        <div routerLink="" class="items">
+            <span class="home">Home</span>
+            <!-- <span><b>{{page}}</b></span> -->
         </div>
         <div class="sort">
             
