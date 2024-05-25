@@ -79,7 +79,8 @@ export class HttpserviceService {
     return this.httpService.get(`https://localhost:7098/api/Address`,{headers:this.authHeader})
   }
   updatAddress(userData: any, addressId: any):Observable<any> {
-    return this.httpService.put(`https://localhost:7098/api/Address?addressId=${addressId}`,{userData},{headers:this.authHeader})
+    userData.type=Number(userData.type)
+    return this.httpService.put(`https://localhost:7098/api/Address?addressId=${addressId}`,{...userData},{headers:this.authHeader})
   }
   addAddress(userData: any):Observable<any> {
     userData.type=Number(userData.type)
