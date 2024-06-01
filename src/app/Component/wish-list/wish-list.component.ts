@@ -21,15 +21,20 @@ export class WishListComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.dataservice.changeHeaderDataState('My WishList')
     if(localStorage.getItem('authToken')!=null)
       {
-    this.wishListService.getAllWishListApiCall().subscribe(res=>this.wishList=res)
+    this.wishListService.getAllWishListApiCall().subscribe(res=>
+      {this.wishList=res.data
+        console.log(this.wishList);
+        
+      })
       }
   }
   removeWishList(wishListId:number)
   {
    this.wishListService.deleteWishListApiCall(wishListId).subscribe(res=>{
-    console.log(res)
+    console.log(res.data)
     console.log(wishListId);
     console.log(this.wishList);
     

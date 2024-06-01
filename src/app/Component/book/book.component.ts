@@ -19,6 +19,7 @@ export class BookComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.subscription=this.dataService.allBookState.subscribe(res=>{this.bookList=res;console.log(this.bookList);
+      this.dataService.changeHeaderDataState('Books');
     })
   }
     

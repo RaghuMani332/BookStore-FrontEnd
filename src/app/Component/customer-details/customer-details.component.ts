@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,6 +16,8 @@ import { DROP_DOWN, LOCATION_ICON } from 'src/assets/svg-icons';
 export class CustomerDetailsComponent implements OnInit {
 
   
+  @Input() cartId!:Number;
+  @Output() orderaddress=new EventEmitter<any>();
 
   cartList!: any;
   order: boolean = true;
@@ -23,7 +25,7 @@ export class CustomerDetailsComponent implements OnInit {
   editadd: any = {};
   addressList: any[] = [];
   addressForm!: FormGroup;
-  orderaddress: any;
+  // orderaddress: any;
   orderId! : number;
   emptyAddress: any = { 
     addressId: null,
@@ -52,21 +54,25 @@ export class CustomerDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('authToken') != null) {
       this.cartService.getAllCartApiCall().subscribe(result1 => {
-        this.cartList = result1
+        this.cartList = result1.data
         this.cartList= this.cartList.filter((ele:any)=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
           console.log(this.cartList);
         
-        this.route.params.subscribe((result2) => {
-          this.cartList = result1.filter((e: any) => e.cartId == result2['cartId'])[0];
-          this.loadAddresses();
+        // this.route.params.subscribe((result2) => {
+        //   this.cartList = result1.filter((e: any) => e.cartId == result2['cartId'])[0];
+        //   this.loadAddresses();
 
-        });
+        // });
+
+        
+          this.cartList = result1.data.filter((e: any) => e.cartId == this.cartId)   
+          this.loadAddresses();
       });
     }
      else {
       this.route.params.subscribe((result2) => {
         this.cartList = this.cartService.getAllCartApiCall().subscribe(res=>{
-        return res.filter((e: any) => e.cartId == result2['cartId'])[0];
+        return res.data.filter((e: any) => e.cartId == result2['cartId'])[0];
         })
       });
     }
@@ -83,7 +89,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   loadAddresses() {
     this.httpService.getAddress().subscribe(res => {
-      this.addressList = res;
+      this.addressList = res.data;
     });
   }
 
@@ -99,7 +105,7 @@ export class CustomerDetailsComponent implements OnInit {
     if (this.editadd && this.editadd.addressId) {
       this.httpService.updatAddress(userData,this.editadd.addressId).subscribe(
         (res:any) => {
-          console.log(res);
+          console.log(res.data);
           this.loadAddresses();
         },
         (err:any) => console.log(err)
@@ -119,7 +125,10 @@ export class CustomerDetailsComponent implements OnInit {
 
   orderAddress(address: any) {
     this.order = false;
-    this.orderaddress = address;
+    // this.orderaddress = address;
+    this.orderaddress.emit({address:address,orderState:false})
+    console.log(this.cartList);
+    
     console.log(this.orderaddress);
   }
 
@@ -149,24 +158,24 @@ export class CustomerDetailsComponent implements OnInit {
     });
   }
 
-  handleOrder() {
-    const orderDate = new Date().toISOString().slice(0, 10);
-    const orderBody = {
-      addressId: this.orderaddress.addressId,
-      orderDate: orderDate,
-      bookId: this.cartList.bookId
-    };
-    this.httpService.addOrder(orderBody).subscribe(res => {
-      this.orderId = res[0];
-      console.log(this.orderId);
-      this.httpService.unCartItem(this.cartList.cartId).subscribe(() => {
-        this.router.navigate([`orderPlaced`, this.orderId]);
-      }, err => {
-        console.error('Error removing cart', err);
-      });
-    }, err => {
-      console.error('Error adding order', err);
-    });
-  }
+  // handleOrder() {
+  //   const orderDate = new Date().toISOString().slice(0, 10);
+  //   const orderBody = {
+  //     addressId: this.orderaddress.addressId,
+  //     orderDate: orderDate,
+  //     bookId: this.cartList.bookId
+  //   };
+  //   this.httpService.addOrder(orderBody).subscribe(res => {
+  //     this.orderId = res[0];
+  //     console.log(this.orderId);
+  //     this.httpService.unCartItem(this.cartList.cartId).subscribe(() => {
+  //       this.router.navigate([`orderPlaced`, this.orderId]);
+  //     }, err => {
+  //       console.error('Error removing cart', err);
+  //     });
+  //   }, err => {
+  //     console.error('Error adding order', err);
+  //   });
+  // }
 
 }

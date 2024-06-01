@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataServiceService } from 'src/app/Service/dataService/data-service.service';
 import { HttpserviceService } from 'src/app/Service/httpService/httpservice.service';
 
 @Component({
@@ -9,12 +10,13 @@ import { HttpserviceService } from 'src/app/Service/httpService/httpservice.serv
 export class OrderListComponent implements OnInit {
 
   orderList! : any[];
-  constructor(private httpService:HttpserviceService) { }
+  constructor(private httpService:HttpserviceService,private dataService:DataServiceService) { }
 
   ngOnInit(): void {
+    this.dataService.changeHeaderDataState('MyOrders')
     if (localStorage.getItem('authToken') != null) {
       this.httpService.getAllOrder().subscribe(res=>{
-      this.orderList=res
+      this.orderList=res.data
     },err=>console.log(err))
     
   }

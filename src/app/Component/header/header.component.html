@@ -26,12 +26,13 @@
                 </div>
                 <ng-template #loggedIn>
                     <div class="profile-main-cnt">
-
-                    <div><button mat-stroked-button color="warn"> <button mat-button (click)="logout()">&nbsp; LOGOUT &nbsp;</button>
-                    </button></div>
+                    <div><b>Hello {{userName}}</b></div>
+                    
                     <hr>
                     <div routerLink="orderList">My Orders</div>
                     <div routerLink="wishList" >Wishlist</div>
+                    <div><button mat-stroked-button color="warn"> <button mat-button (click)="logout()">&nbsp; LOGOUT &nbsp;</button>
+                    </button></div>
                 </div>
                 </ng-template>
               <!-- <button mat-menu-item (click)="openDialog()"></button> -->
@@ -50,7 +51,7 @@
 </div>
 </div>
 <!-- ----------------------------------------------------- -->
-<div *ngIf="false; else nav"  class="book-main-cnt">
+<div *ngIf="pages; else nav"  class="book-main-cnt">
     <div routerLink="" class="items">
         <span class="book">Books</span>
         <span>(128items)</span>
@@ -70,8 +71,8 @@
 <ng-template #nav>
     <div  class="book-main-cnt">
         <div routerLink="" class="items">
-            <span class="home">Home</span>
-            <!-- <span><b>{{page}}</b></span> -->
+            <span class="home">Home/</span>
+            <span><b>{{page}}</b></span>
         </div>
         <div class="sort">
             

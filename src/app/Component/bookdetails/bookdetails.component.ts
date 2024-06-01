@@ -37,15 +37,18 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     this.subscription = this.dataservice.allBookState.subscribe(res1 => {
       console.log(res1);
       this.route.params.subscribe(res2 => {
         this.Selectedbook = res1.filter(e => e.bookId == res2['bookId'])[0]
+        this.dataservice.changeHeaderDataState(`Book(${this.Selectedbook.bookId})`)
+
       })
       if(localStorage.getItem('authToken')!=null){
-      this.wishListService.getAllWishListApiCall().subscribe(res3=>{this.wishList=res3
-        console.log(res3);
-        console.log(...res3);
+      this.wishListService.getAllWishListApiCall().subscribe(res3=>{this.wishList=res3.data
+        // console.log(res3.data);
+        // console.log(...res3);
         this.wishList.filter((e:any)=>{
           console.log(e);
           if(e.bookId==this.Selectedbook.bookId)
@@ -61,7 +64,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
 
 
     this.cartservice.getAllCartApiCall().subscribe(res => {
-      this.book = res.filter((e: any) => e.bookId == this.Selectedbook.bookId)
+      this.book = res.data.filter((e: any) => e.bookId == this.Selectedbook.bookId)
       console.log(this.book);
 
       for (let i = 0; i < this.book.length; i++) {
@@ -94,7 +97,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   handleWishList(bookId:number)
   {
     this.isWishList=false;
-    this.wishListService.addWishListApiCall(bookId).subscribe(res=>console.log(res))
+    this.wishListService.addWishListApiCall(bookId).subscribe(res=>console.log(res.data))
   }
 
 
