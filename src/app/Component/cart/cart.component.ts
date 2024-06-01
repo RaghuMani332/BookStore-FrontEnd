@@ -15,15 +15,30 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+
+
+
+  order: boolean = true;
+  orderaddress:any;
+
+  dataCartId!:number
+
   templist!:any;
+  addressDetails:boolean=true;
   flag:boolean=false
   cartList: any[] = []
+  orderId: any;
+
+  
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private cartService: CartServiceService,private dataservice:DataServiceService,public dialog: MatDialog,private route: Router,private router: ActivatedRoute,private httpservice:HttpserviceService) {
     iconRegistry.addSvgIconLiteral("location-icon", sanitizer.bypassSecurityTrustHtml(LOCATION_ICON)),
       iconRegistry.addSvgIconLiteral("drop-down-icon", sanitizer.bypassSecurityTrustHtml(DROP_DOWN))
   }
   count!: number;
   ngOnInit(): void {
+
+
+this.dataservice.changeHeaderDataState('MyCart');
 
 
     this.router.params.subscribe(res1 => {
@@ -39,23 +54,20 @@ export class CartComponent implements OnInit {
           this.templist=this.cartList;
           
         })
+
+
+        //---------------
+        
+        //----------------
       }
 
     
 
     this.cartService.getAllCartApiCall().subscribe(res => {
-      this.cartList = res
+      this.cartList = res.data
       this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
         console.log(this.cartList);
     })
- 
-        
-        this.cartService.getAllCartApiCall().subscribe(res => {
-          this.cartList = res
-          this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
-            console.log(this.cartList);
-        })
-      
   }
   handlecount(data: string, cart?: any) {
     this.count = cart.quantity;
@@ -98,78 +110,71 @@ export class CartComponent implements OnInit {
   }
   handlePlaceOrder(data:any,choice?:string)
   {
+    
     if(localStorage.getItem('authToken')!=null)
       {
         this.dataservice.changeOrderBookState(data);
-        this.route.navigate(['/customerDetails',data.cartId])
+        // this.route.navigate(['/customerDetails',data.cartId])
+        this.dataCartId=data.cartId;
+        
+        this.addressDetails=!this.addressDetails
+       
       }
-      // else{
-      //   this.openDialog(choice)
-      //   this.httpservice.login('raghum11154@gmail.com', 'Raghu@1234').subscribe(res =>{
-      //     localStorage.setItem('authToken', res.data)
-      //     this.templist=this.cartList;
-      //   console.log(this.templist);
-      //     console.log(localStorage.getItem('authToken'));
-          
-      //     this.cartService.getAllCartApiCallThroughToken(res.data).subscribe(res => {
-      //       this.cartList = res
-      //       this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
-      //         console.log(this.cartList);
-  
-      //       console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
-      //       window.location.reload()
-      //     },err=>console.log(err)
-      //     )
-  
-        
-        
-      //   })
-      //   //------------------------
-       
-
-      // }
       else{
-        this.openDialog('placeOrder',this.cartList)
-        
-        //   this.templist=this.cartList;
-        // console.log(this.templist);
-        //   console.log(localStorage.getItem('authToken'));
-        //   var v=localStorage.getItem('authToken')+'';
-          
-        //   this.cartService.getAllCartApiCallThroughToken(v).subscribe(res => {
-        //     this.cartList = res
-        //     this.cartList= this.cartList.filter(ele=>{if(ele.quantity>0 && !ele.isUnCarted && !ele.isOrdered) return ele;})
-        //       console.log(this.cartList);
-  
-        //     console.log(this.updateCart(this.templist,this.cartList,localStorage.getItem('authToken')));
-        //     window.location.reload()
-        //   },err=>console.log(err)
-        // )
-        //------------------------
-       
-
+        this.openDialog('placeOrder',this.cartList,)
       }
 
   }
   openDialog(choice:any,cartitem:any) {
-    this.dialog.open(LoginComponent,{data:{val:choice,cart:cartitem}});
+    this.dialog.open(LoginComponent,{data:{val:choice,cart:cartitem},width:"700px",height:"fit-content"});
   }
 
-//    updateCart(a: any, b: any,token?:any) {
-//     for (const itemA of a) {
-//       const itemB = b.find((item:any) => item.bookId === itemA.bookId);
-//       if (itemB) {
-//           itemB.quantity += itemA.quantity;
-//           this.cartService.updateQuantityToCartApiCall(itemB.cartId,itemB.quantity,token).subscribe(res=>console.log(res)
-//         )
 
-//       } else {
-//           b.push(itemA);
-//           this.cartService.addToCartApiCall({bookId:itemA.bookId,quantity:itemA.quantity},token).subscribe(res=>console.log(res)
-//           )
-//       }
-//   }
-//   return b;
-// }
+  SelectedAddress($event: any) {
+    this.orderaddress=$event.address
+    console.log(this.cartList);
+    
+    this.order=$event.orderState
+    }
+
+  handleOrder() {
+    const orderDate = new Date().toISOString().slice(0, 10);
+    for (let i = 0; i < this.cartList.length; i++) {
+      const orderBody = {
+        addressId: this.orderaddress.addressId,
+        orderDate: orderDate,
+        bookId: this.cartList[i].bookId
+      };
+      this.httpservice.addOrder(orderBody).subscribe(res => {
+        this.orderId = res.data[0];
+        // console.log(this.orderId);
+        this.httpservice.unCartItem(this.cartList[i].cartId).subscribe(() => {
+          // this.route.navigate([`orderPlaced`, this.orderId]);
+        }, err => {
+          console.error('Error removing cart', err);
+        });
+      }, err => {
+        console.error('Error adding order', err);
+      });
+      
+    }
+    this.route.navigate([`orderPlaced`]);
+    // const orderBody = {
+    //   addressId: this.orderaddress.addressId,
+    //   orderDate: orderDate,
+    //   bookId: this.cartList.bookId
+    // };
+    // this.httpService.addOrder(orderBody).subscribe(res => {
+    //   this.orderId = res[0];
+    //   console.log(this.orderId);
+    //   this.httpService.unCartItem(this.cartList.cartId).subscribe(() => {
+    //     this.router.navigate([`orderPlaced`, this.orderId]);
+    //   }, err => {
+    //     console.error('Error removing cart', err);
+    //   });
+    // }, err => {
+    //   console.error('Error adding order', err);
+    // });
+  }
 
 }

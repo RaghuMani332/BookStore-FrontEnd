@@ -55,6 +55,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { WishListService } from 'src/app/Service/WishList/wish-list.service';
 import { BookServiceService } from 'src/app/Service/bookService/book-service.service';
 import { DataServiceService } from 'src/app/Service/dataService/data-service.service';
 import { UserServiceService } from 'src/app/Service/userService/user-service.service';
@@ -68,36 +69,47 @@ import { LoginComponent } from '../login/login.component';
 })
 export class HeaderComponent implements OnInit {
 
-  page:string='MyCart'
+  page!:string
   userName!:string;
 loggedout: boolean=true;
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,public dialog: MatDialog,private bookservice:BookServiceService,private dataService:DataServiceService,private userService:UserServiceService) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,public dialog: MatDialog,private bookservice:BookServiceService,private dataService:DataServiceService,private userService:UserServiceService,private wishListService:WishListService) {
     iconRegistry.addSvgIconLiteral("book-icon", sanitizer.bypassSecurityTrustHtml(BOOK_ICON)),
     iconRegistry.addSvgIconLiteral("search-icon", sanitizer.bypassSecurityTrustHtml(SEARCH_ICON)),
     iconRegistry.addSvgIconLiteral("profile-icon", sanitizer.bypassSecurityTrustHtml(PROFILE_ICON)),
     iconRegistry.addSvgIconLiteral("cart-icon", sanitizer.bypassSecurityTrustHtml(CART_ICON)),
     iconRegistry.addSvgIconLiteral("dropdown-icon", sanitizer.bypassSecurityTrustHtml(DROP_DOWN))
    }
+   pages!:boolean;
 
   ngOnInit(): void {
     if(localStorage.getItem('authToken'))
       {
         this.loggedout=false
-        this.userService.getNameByTokenApiCall().subscribe(res=>{this.userName=res.data 
-        })
+      this.userName=localStorage.getItem('name')||'profile';
+          this.wishListService.getAllWishListApiCall().subscribe(res=>{this.dataService.changeWishList(res)})
+       
       }
       else{
         this.userName='Profile'
       }
     this.bookservice.getAllBookApiCall().subscribe(res=>
       {
-        this.dataService.changeAllBookList(res)
+        this.dataService.changeAllBookList(res.data)
+        this.dataService.headerDataState.subscribe(res=>{this.page=res
+          if(res=='Books')
+            {
+              this.pages=true
+            }
+            else{
+              this.pages=false
+            }
+        })
       },
     err=>console.log(err))
   }
   openDialog() {
-    this.dialog.open(LoginComponent)
+    this.dialog.open(LoginComponent,{width:"700px",height:"fit-content"})
   }
   logout()
   {

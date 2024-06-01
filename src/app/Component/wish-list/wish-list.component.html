@@ -21,14 +21,14 @@
     </div> -->
 
     <div class="wishlist-main-cnt">
-        <div class="heading-content">
+        <!-- <div class="heading-content">
             <div class="wishlist-items">
                <span class="home" routerLink="/books">Home / </span>
                <span class="items">My WishList</span>
             </div>
-        </div>
+        </div> -->
         <div class="wishlist-cnt"  >
-                <div class="address-header"><span>MyWishlist()</span></div>
+                <div class="address-header"><span>MyWishlist({{wishList.length}})</span></div>
                     <div class="content" *ngFor="let book of wishList">
                         <div class="book-img">
                            <img src="{{ book.BookImage}}" alt="">

@@ -8,6 +8,24 @@ import { Book } from 'src/assets/BookObjectInterface';
 export class DataServiceService {
 
 
+
+
+
+private wishList=new BehaviorSubject<any>({});
+wishListState=this.wishList.asObservable();
+changeWishList(value:any)
+{
+  this.wishList.next(value);
+}
+
+private headerData=new BehaviorSubject<string>('');
+headerDataState=this.headerData.asObservable();
+  changeHeaderDataState(value:string)
+  {
+    this.headerData.next(value);
+  }
+
+
   private allBookList=new BehaviorSubject<Book[]>([]);
   allBookState=this.allBookList.asObservable();
   changeAllBookList(value:Book[])
@@ -23,14 +41,14 @@ export class DataServiceService {
     this.orderBook.next(value);
   }
 
-  // private bookObj=new BehaviorSubject<Book>({});
-  // currentState=this.bookObj.asObservable();
+  // private cartdetail=new BehaviorSubject<Number>(0);
+  // cartdetailcurrentState=this.cartdetail.asObservable();
   // constructor() { }
-  // changeState(value:Book)
+  // cartdetailchangeState(value:Number)
   // {
-  //   this.bookObj.next(value);
+  //   this.cartdetail.next(value);
   // }
-  //------------------------
+  // ------------------------
   private tempCart=new BehaviorSubject<any>({});
   tempCartState=this.tempCart.asObservable();
   tempList:any=[];

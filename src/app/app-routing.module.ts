@@ -8,8 +8,13 @@ import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { OrderListComponent } from './Component/order-list/order-list.component';
 import { OrderPlacedComponent } from './Component/order-placed/order-placed.component';
 import { WishListComponent } from './Component/wish-list/wish-list.component';
+import { LoginComponent } from './Component/login/login.component';
 
 const routes: Routes = [
+  {
+    path:'login',
+    component:LoginComponent
+  },
  
   {
     path:"",
@@ -43,7 +48,7 @@ const routes: Routes = [
       component:OrderListComponent
     },
     {
-      path:'orderPlaced/:orderId',
+      path:'orderPlaced',
       component:OrderPlacedComponent
     }
   ]

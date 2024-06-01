@@ -52,7 +52,7 @@ export class HttpserviceService {
   }
   unCartItem(cartId:number):Observable<any>
   {
-    return this.httpService.patch(`https://localhost:7098/api/Cart?cartId=${cartId}`,{},{headers:this.authHeader})
+    return this.httpService.patch(`https://localhost:7098/api/Cart/${cartId}`,{},{headers:this.authHeader})
   }
   getNamebyToken():Observable<any>
   {
@@ -68,11 +68,11 @@ export class HttpserviceService {
   }
   deleteWishList(wishListId:number):Observable<any>
   {
-    return this.httpService.delete(`https://localhost:7098/api/WishList?wishListId=${wishListId}`,{headers:this.authHeader})
+    return this.httpService.delete(`https://localhost:7098/api/WishList/${wishListId}`,{headers:this.authHeader})
   }
   removeAddress(addressId:number):Observable<any>
   {
-    return this.httpService.delete(`https://localhost:7098/api/Address?addressId=${addressId}`,{headers:this.authHeader})
+    return this.httpService.delete(`https://localhost:7098/api/Address/${addressId}`,{headers:this.authHeader})
   }
   getAddress():Observable<any>
   {
@@ -80,7 +80,7 @@ export class HttpserviceService {
   }
   updatAddress(userData: any, addressId: any):Observable<any> {
     userData.type=Number(userData.type)
-    return this.httpService.put(`https://localhost:7098/api/Address?addressId=${addressId}`,{...userData},{headers:this.authHeader})
+    return this.httpService.put(`https://localhost:7098/api/Address/${addressId}`,{...userData},{headers:this.authHeader})
   }
   addAddress(userData: any):Observable<any> {
     userData.type=Number(userData.type)

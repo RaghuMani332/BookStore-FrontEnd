@@ -1,12 +1,18 @@
-<div class="cart-outer-cnt" *ngFor="let book of cartList">
+
+<div class="cart-outer-cnt" >
     <br>
-    <div class="count-cnt">
-        <span>My cart(1)</span>
+    <div class="count-cnt" *ngIf="cartList.length>0;else nobook">
+        <span>My cart({{cartList.length}})</span>
         <div class="loc-icon-cnt"><span class="loc-icon"> <mat-icon svgIcon="location-icon"></mat-icon>
                 BridgeLabzSolution LLP,No... <mat-icon svgIcon="drop-down-icon"></mat-icon></span></div>
     </div>
+
+    <ng-template #nobook>
+        <div class="no-book">No books available</div>
+    </ng-template>
+
     <br>
-    <div class="img-cnt">
+    <div class="img-cnt" *ngFor="let book of cartList">
        
         <div class="content">
             <img src="{{book.bookImage}}"
@@ -24,13 +30,83 @@
             </div>
             
         </div>
-        <button class="button" mat-raised-button color="primary" (click)="clearCart(book)" >Clear</button>
+        <span class="button"  (click)="clearCart(book)" >Clear</span>
 
-        <button class="button" mat-raised-button color="primary" (click)="handlePlaceOrder(book,'')">PLACE ORDER</button>
 
 
     </div>
+    <div class="placeOrder" *ngIf="cartList.length>0">
+        <button class="button" mat-raised-button color="primary" (click)="handlePlaceOrder(cartList,'')">PLACE ORDER</button>
+    </div>
+    <!-- <button class="button" mat-raised-button color="primary" (click)="handlePlaceOrder(cartList,'')">PLACE ORDER</button> -->
+
    
 </div>
+
+
+
+<div class="AddressDetail-outer-cnt" *ngIf="addressDetails; else addressdetails"> 
+    
 <div class="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Address Details</div>
 <div class="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Order Summer</div>
+
+</div>
+
+<!-- <div class="AddressDetail-outer-cnt">
+
+</div> -->
+
+<ng-template #addressdetails>
+    <app-customer-details (orderaddress)="SelectedAddress($event)"></app-customer-details>
+
+
+<!-- --------------------------------------------------------- -->
+
+<div class="cart-outer-cnt">
+    <div class="address-header"><span>Order Summary</span></div>
+    <div *ngIf="!order">
+        <div *ngFor="let cart of cartList">
+
+        <!-- </div> -->
+        <div class="img-cnt">
+            <div class="content">
+                <img [src]="cart.bookImage" alt="">
+                <div class="cart-detail">
+                    <span class="booktitle">{{cart.bookName}}</span>
+                    <span style="color: #818181;">{{cart.authorName}}</span>
+                    <div class="rating-cnt">
+                        <span class="sellingprice">Rs.{{cart.price}}
+                            <span class="originalprice">Rs.1999</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="continue">
+        <button mat-raised-button color="primary" class="continue-btn" (click)="handleOrder()">CHECKOUT</button>
+    </div>
+    </div>
+</div>
+<!-- ------------------------------------------------------------------- -->
+</ng-template> 
+
+
+
+
+
+
+
+
+
+<!-- --------------------- -->
+<!-- <div class="AddressDetail-outer-cnt"> 
+    <div class="bottom" *ngIf="addressDetails; else addressdetails">
+        <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Address Details</div>
+        <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Address Details</div>
+</div>
+    <ng-template #addressdetails>
+        <app-customer-details [cartId]="dataCartId"></app-customer-details>
+    </ng-template> 
+</div> -->

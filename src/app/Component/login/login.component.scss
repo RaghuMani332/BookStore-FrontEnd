@@ -1,21 +1,38 @@
 
 .main-cnt {
-    width: 800px;
+    // width: 800px;
   }
-  
+  .divider {
+    display: flex;
+    flex-direction: row;
+    // margin-top: 20px;
+    // margin-bottom: 20px;
+    width: 100%;
+}
+
+.half-line {
+    width: 40%;
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.or {
+    padding: 0 10px;
+}
   .login-outer-cnt {
-    margin-left: 200px;
+    // margin-left: 200px;
     height: 65%;
-    width: 45%;
-    background-color: yellow;
-    border: 1px solid red;
+    width: 100%;
+    // background-color: yellow;
+    // border: 1px solid red;
     display: flex;
     align-items: center;
   }
   
   .login-img {
     height: 80%;
-    width: 45%;
+    width: 80%;
     border-radius: 5% 0% 0% 5%;
     display: flex;
     align-items: center;
@@ -25,15 +42,15 @@
   
   .login-img img {
     height: 85%;
-    width: 85%;
+    width: 100%;
     border-radius: 50%;
   }
   
   .login-cnt {
     height: 90%;
     width: 100%;
-    background-color: aliceblue;
-  
+   border-radius: 4px;
+    box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 48%);  
     .login-cnt-inner {
       padding-top: 5%;
       display: flex;

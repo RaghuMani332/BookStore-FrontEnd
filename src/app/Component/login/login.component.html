@@ -1,6 +1,6 @@
 <div class="login-outer-cnt">
   <div class="login-img">
-    <img src="https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A85534115-ba16-412e-b646-6dd43d839dd8&params=version%3A0&token=1716363155_da39a3ee_8f3e437e7efab007746b5f58e5c639c163c86c56&api_key=CometServer1" alt="">
+    <img src="assets/cart.png" alt="">
   </div>
   <div class="login-cnt">
     <div class="login-cnt-inner">
@@ -11,32 +11,35 @@
     <div *ngIf="activeTab === 'login'; else signup">
       <br>
       <form [formGroup]="loginForm" class="inputs">
-        <div class="email-input">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="pat@example.com" formControlName="username" required>
+            <input matInput placeholder="abc@gmail.com" formControlName="username" required>
             <mat-error *ngIf="loginForm.get('username')?.invalid">{{getErrorMessage('username')}}</mat-error>
           </mat-form-field>
-        </div>
         
-        <div class="password-input">
-          <mat-form-field appearance="fill">
+        <!-- <div class="password-input"> -->
+          <mat-form-field appearance="outline">
             <mat-label>Enter your password</mat-label>
             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
-        </div>
+        <!-- </div> -->
         <button class="login-btn" mat-button (click)="login()">&nbsp; LOGIN &nbsp;</button>
         <br>
-        --------------------------- &nbsp; &nbsp; OR &nbsp; &nbsp; ---------------------------
+        <div class="divider">
+          <hr class="half-line"><span class="or">OR</span><hr class="half-line">
+      </div>
+        <!-- --------------------------- &nbsp; &nbsp; OR &nbsp; &nbsp; --------------------------- -->
       </form>
-      <br><br>
+      <br>
       <div class="other-login">
         <button mat-raised-button color="primary">FaceBook</button>
-        <button mat-raised-button color="primary">Google</button>
+        <button mat-raised-button >Google</button>
+        
       </div>
+      <br>
     </div>
     
     <ng-template #signup>
